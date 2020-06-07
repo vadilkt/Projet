@@ -23,6 +23,10 @@ if(isset($_POST['connexion'])){
             $_SESSION['username']=$username;
             header ('location: menu1.php');
             exit;
+        }else{
+            $_SESSION['error']=1;
+            header ("location: index.php");
+            exit();
         }
     }
 }

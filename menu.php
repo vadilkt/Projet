@@ -1,32 +1,35 @@
-<?php 
-session_start();
-?>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">IMmobil</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+        <a class="navbar-brand" href="index.php">Immobil</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
+        <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav nav navbar-left">
                 <li class="nav-item active">
                     <a class="nav-link" href="index.php">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Visiter</a>
+                    <a class="nav-link" href="#visiter">Visiter</a>
                 </li>
-               
+
                 <li class="nav-item">
                     <a class="nav-link" href="">A propos</a>
                 </li>
             </ul>
             <?php
-                if(!isset($_SESSION['username'])){
-                    echo '<ul class="nav col-lg-4 navbar-nav flex-row justify-content-around ml-auto navbar-login">
+            if (!isset($_SESSION['username'])) {
+                echo '<ul class="nav navbar-right col-lg-4 navbar-nav flex-row justify-content-around ml-auto navbar-login">
                     <li class="nav-item dropdown">
                         <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-primary dropdown-toggle">Connexion</button>
                         <ul class="dropdown-menu dropdown-menu-right mt-2">
-                            <li class="px-4 py-2">
+                            <li class="px-4 py-2">';
+                            if(isset($_SESSION['error'])){
+                                echo'<p class="text-warning"> Veuillez entrer votre nom d\'utilisateur/email et/ou votre mot de passe! </p>';
+                            }
+
+                            echo'
                                 <form class="form" role="form" action="connexion.php" method="post" >
                                     <div class="form-group">
                                         <input type="text" name="username" title="Nom d\'utilisateur ou Email"class="form-control form-control-sm" placeholder="E-mail ou nom d\'utilisateur" required="required">
@@ -74,23 +77,27 @@ session_start();
                         </ul>
                     </li>
                 </ul>';
-                } else if(isset($_SESSION['username']))
-                {
-                    echo '<ul class="nav navbar-login navbar-nav flex-row justify-content-around ml-auto">
+            } else if (isset($_SESSION['username'])) {
+                echo '<ul class="nav navbar-login navbar-nav flex-row justify-content-around ml-auto">
                        <li class="nav-item">
                        <i class="fas fa-user"></i>
-                           <p class="text-bolder pr-2">' ;
-                           echo $_SESSION['username'].'</p>';
-                        echo '  
+                           <p class="text-bolder pr-2">';
+                echo $_SESSION['username'] . '</p>';
+                echo '  
                         </li>
                         <li class="nav-item ml-10">
-                            <a class="btn btn-outline-primary" href="ajouter.php" >Ajouter un appartement</a>
+                            <a class="btn btn-outline-primary" class="add_app" href="ajouter.php" >Ajouter un appartement</a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-primary ml-3" href="deconnexion.php">Déconnexion</a>
                         </li>';
-                }
+            }
             ?>
         </div>
     </div>
 </nav>
+<script>
+    $(document).on("click", ".navbar-right .dropdown-menu", function(e) {
+        e.stopPropagation();
+    });
+</script>

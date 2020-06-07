@@ -1,7 +1,10 @@
+<?php session_start() ?>
 <!DOCTYPE html>
+
 <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Immobil</title>
+        <title>Immobil</title>
+        <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
         <script type="text/javascript" src="js/jquery.slim.min.js"></script>
         <script type="text/javascript" src="js/popper.min.js"></script>

@@ -108,13 +108,20 @@ if(!isset($_SESSION['username'])){
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-12 control-label" for="textinput">Contact</label>
+                            <div class="col-12">
+                                <input id="textinput" name="contact" type="text" placeholder="+237 xxx-xxx-xxx"
+                                    class="form-control form-control-sm input-md" required="">
+
+                            </div>
+                        </div>
 
 
                         <div class="form-group">
                             <label class="col-12 control-label" for="image">Photos</label>
                             <div class="col-12">
-                                <input id="image" name="image[]" multiple accept=".jpg, .png, .gif, .jpeg" class="input-file"
-                                    type="file">
+                                <input id="image" name="image[]" multiple accept=".jpg, .png, .gif, .jpeg" class="input-file" type="file" required="">
                             </div>
                         </div>
                         <div class="form-group">
