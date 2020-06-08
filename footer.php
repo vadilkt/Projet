@@ -21,7 +21,7 @@
         <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
   
           
-          <h6 class="text-uppercase font-weight-bold">Products</h6>
+          <h6 class="text-uppercase font-weight-bold"></h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
             Matricule: 
@@ -33,7 +33,7 @@
         <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
   
           
-          <h6 class="text-uppercase font-weight-bold">Useful links</h6>
+          <h6 class="text-uppercase font-weight-bold"></h6>
           <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
           <p>
             Matricule:
