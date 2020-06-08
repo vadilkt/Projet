@@ -20,6 +20,9 @@
         <?php  include ("menu.php")?>
         <?php include ("accueil.php")?>
         
+        <?php include ("footer.php") ?>
+        
+        
     </body>
 </html>
     

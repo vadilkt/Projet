@@ -1,5 +1,5 @@
 <?php session_start();
-ini_set('display_error',1); ?>
+ini_set('display_error', 1); ?>
 
 
 <div id="slides" class="carousel slide carousel-fade" data-ride="carousel">
@@ -44,7 +44,7 @@ ini_set('display_error',1); ?>
 
 <section class="search-sec" id="search">
     <div class="container-fluid">
-        <form action="#" method="post" novalidate="novalidate">
+        <form action="trouver.php" method="post">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="row">
@@ -65,7 +65,7 @@ ini_set('display_error',1); ?>
                             </select>
                         </div>
                         <div class="form-group py-3 px-2 col-lg-2 col-md-2 col-sm-12 p-0">
-                            <select name="salleDeBain" class="form-control search-slt" id="exampleFormControlSelect1">
+                            <select name="salleBain" class="form-control search-slt" id="exampleFormControlSelect1">
                                 <option>Salles de bain</option>
                                 <option>1</option>
                                 <option>2</option>
@@ -78,12 +78,12 @@ ini_set('display_error',1); ?>
                             </select>
                         </div>
                         <div class="range-field py-3 search-slt form-group px-2 col-lg-2 col-md-2 col-sm-12 p-0 w-50">
-                            <label for="price">Prix</label>
+                            <label for="price">Prix (max)</label>
                             <input type="range" max="500000" min="5000" step="2500" id="price" name="price">
                             <span class="col-lg-2 col-md-2 col-sm-12 font-weight-bold text-primary ml-2 mt-1 valueSpan"></span><strong class="text-primary">FCFA</strong>
                         </div>
                         <div class="ml-auto  py-3 px-2 form-group col-lg-2 col-md-2 col-sm-12 p-0">
-                            <button type="button" name ="trouver" class="btn btn-primary wrn-btn" style="margin-left: auto">Trouver</button>
+                            <input type="submit" name="trouver" class="btn btn-primary wrn-btn" style="margin-left: auto" value="Trouver">
                         </div>
                     </div>
                 </div>
@@ -120,74 +120,76 @@ ini_set('display_error',1); ?>
 </div>
 
 
-<div class="container-fluid padding">
-    <div class="row welcome text-center">
-        <div class="col-12">
-            <h1 class="display-4 text-uppercase">Vos appartements.</h1>
-        </div>
-        <div class="col-12">
-            <hr>
+<div class="bg">
+    <div class="row jumbotron bg-light">
+        <div class="row welcome text-center">
             <div class="col-12">
-                <p class="lead">Bienvenu sur <h3 class="font-weight-bolder">Immobil!</h3>
-                    Que vous soyez de passage ou à la recherche d'un lieu de résidence permanent à
-                    Dschang, vous êtes servis.
-                </p>
+                <h1 class="display-4 text-uppercase">Vos appartements.</h1>
+            </div>
+            <div class="col-12">
+                <hr>
+                <div class="col-12">
+                    <p class="lead">Bienvenu sur <h3 class="font-weight-bolder">Immobil!</h3>
+                        Que vous soyez de passage ou à la recherche d'un lieu de résidence permanent à
+                        Dschang, vous êtes servis.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<hr>
+    <hr>
 
 
 
-<div class="row" id="visiter">
-    <?php 
-        $con=mysqli_connect('localhost','root','','appartements');
-        $query="SELECT * FROM appartement ORDER BY ID DESC";
-        $ans=mysqli_query($con,$query);
-        while($row=mysqli_fetch_array($ans)){
-            echo '<div class="col-md-4 product-grid">';
+    <div class="row" id="visiter">
+        <?php
+        $con = mysqli_connect('localhost', 'root', '', 'appartements');
+        $query = "SELECT * FROM appartement ORDER BY ID DESC";
+        $ans = mysqli_query($con, $query);
+        while ($row = mysqli_fetch_array($ans)) {
+            echo '<div class="col-md-4 product-grid bg-light ml-2">';
 
-                echo'<div class="card-img-top image">';
-                    include ("image.php");
+            echo '<div class="card-img-top image">';
+            include("image.php");
+            echo '</div>';
+
+            echo '<h3 class="text-center">' . $row['localisation'] . '-' . $row['nb_piece'] . ' Pièces';
+            echo '</h3>';
+            echo '<h5 class="text-justify">' . $row['chambre'] . ' Chambres, ' . $row['salles_bain'] . ' salle(s) de bain';
+            echo '</h5>';
+            echo '<h5 class="text-justify">' . $row['prix'] . ' FCFA';
+            echo '</h5>';
+
+
+            if (isset($_SESSION['username'])) {
+                echo '<button type="button" data-toggle="modal" data-target="#popup" class="btn btn-outline-primary"';
+                echo '>Contacter le vendeur</button>';
+                echo '<div id="popup" class="modal" role="dialog">';
+                echo '<div class="modal-content">';
+                echo '<div class="modal-header">';
+                echo '<button class="close" type="button" data-dismiss="modal">&times;</button>';
+                echo '<h4 class="modal-title">Contacter le vendeur</h4>';
+                echo '</div>';
+                echo '<div class="modal-body">';
+                echo '<p>Tel: ' . $row['contact'] . '</p>';
+                echo '</div>';
+                echo '<div class="modal-footer">';
+                echo '<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>';
                 echo '</div>';
 
-                echo '<h3 class="text-center">'.$row['localisation'].'-'.$row['nb_piece'].' Pièces';
-                echo '</h3>';
-                echo '<h5 class="text-justify">'.$row['chambre'].' Chambres, '. $row['salles_bain'].' salle(s) de bain';
-                echo '</h5>';
- 
-                
-                if(isset($_SESSION['username'])){
-                    echo '<button type="button" data-toggle="modal" data-target="#popup" class="btn btn-outline-primary"';
-                    echo '>Contacter le vendeur</button>';
-                    echo '<div id="popup" class="modal" role="dialog">';
-                        echo '<div class="modal-content">';
-                            echo '<div class="modal-header">';
-                                echo '<button class="close" type="button" data-dismiss="modal">&times;</button>';
-                                echo '<h4 class="modal-title">Contacter le vendeur</h4>';
-                            echo '</div>';
-                            echo '<div class="modal-body">';
-                                echo '<p>Tel: '. $row['contact'].'</p>';
-                            echo '</div>';
-                            echo '<div class="modal-footer">';
-                                echo '<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>';
-                            echo '</div>';
-                               
 
-                        echo '</div>';
-                    echo '</div>';
-                }
-                else{
-                    echo '<a class="btn btn-outline-primary" href="#top">Connexion/inscription</a>';
-                }
+                echo '</div>';
+                echo '</div>';
+            } else {
+                echo '<a class="btn btn-outline-primary" href="#top">Connexion/inscription</a>';
+            }
 
 
 
             echo '</div>';
-
         }
-    ?>
+        ?>
+    </div>
 </div>

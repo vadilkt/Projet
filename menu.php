@@ -15,7 +15,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="">A propos</a>
+                    <a class="nav-link" href="#propos">A propos</a>
                 </li>
             </ul>
             <?php
